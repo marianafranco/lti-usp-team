@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/java"/>
+	<classpathentry excluding="*.asl" kind="src" path="src/asl"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/opt/Jason-1.3.9/lib/jason.jar" sourcepath="/Jason"/>
+	<classpathentry kind="lib" path="/opt/Jason-1.3.9/lib/cartago.jar"/>
+	<classpathentry kind="lib" path="/opt/Jason-1.3.9/lib/jacamo.jar"/>
+	<classpathentry kind="lib" path="/opt/Jason-1.3.9/lib/c4jason.jar" sourcepath="/CArtAgO"/>
+	<classpathentry kind="lib" path="lib/eismassim-2.1.jar"/>
+	<classpathentry kind="lib" path="lib/eis-0.3.jar"/>
+	<classpathentry kind="lib" path="lib/eis-jason.jar"/>
+	<classpathentry kind="lib" path="lib/moise.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

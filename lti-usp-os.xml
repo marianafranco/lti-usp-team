@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?xml-stylesheet href="http://moise.sourceforge.net/xml/os.xsl" type="text/xsl" ?>
+
+<organisational-specification 
+
+    id="lti_usp_team_2013"
+    os-version="0.1"
+
+    xmlns='http://moise.sourceforge.net/os'
+    xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+    xsi:schemaLocation='http://moise.sourceforge.net/os
+                        http://moise.sourceforge.net/xml/os.xsd' >
+
+    <structural-specification>
+        <role-definitions>
+            <role id="martian" />
+            <role id="map_explorer">
+            	<extends role="martian"/>
+			</role>
+			<role id="map_explorer_helper">
+            	<extends role="martian"/>
+			</role>
+            <role id="zone_explorer">
+            	<extends role="martian"/>
+			</role>
+			<role id="soldier">
+            	<extends role="martian"/>
+			</role>
+			<role id="medic">
+            	<extends role="martian"/>
+			</role>
+			<role id="guardian">
+            	<extends role="martian"/>
+			</role>
+            <role id="inspector">
+            	<extends role="martian"/>
+			</role>
+            <role id="repairer">
+            	<extends role="martian"/>
+			</role>
+            <role id="sentinel">
+            	<extends role="martian"/>
+			</role>
+			<role id="saboteur">
+            	<extends role="martian"/>
+			</role>
+			<role id="coordinator" />
+        </role-definitions>
+
+        <group-specification id="lti_usp_team" >
+            <roles>
+            	<!-- 
+            	<role id="soldier" min="0" max="24" />
+            	<role id="guardian" min="0" max="1" />
+            	<role id="medic" min="0" max="1" />
+            	<role id="zone_explorer" min="0" max="1" />
+            	
+            	<role id="saboteur" min="0" max="1" />
+            	<role id="sentinel" min="0" max="1" />
+            	<role id="inspector" min="0" max="1" />
+            	<role id="repairer" min="0" max="1" />
+            	-->
+            	<role id="map_explorer" min="0" max="1" />
+                <role id="map_explorer_helper" min="0" max="1" />
+                 
+                <role id="coordinator" min="1" max="1" />
+            </roles>
+
+            <links>
+                <link from="martian" to="martian" type="communication"
+                      scope="intra-group" extends-subgroups="true" bi-dir="true"/>
+				<link from="coordinator" to="martian" type="communication"
+                      scope="intra-group" extends-subgroups="true" bi-dir="true"/>
+            </links>
+
+			<subgroups>
+				<group-specification id="attack_group" min="1" max="1">
+					<roles>
+		                <role id="saboteur" min="0" max="1" />
+            			<role id="sentinel" min="0" max="1" />
+            			<role id="inspector" min="0" max="1" />
+            			<role id="repairer" min="0" max="1" />
+		            </roles>
+				</group-specification>
+				<group-specification id="best_zone_group" min="1" max="1">
+					<roles>
+		                <role id="soldier" min="0" max="11" /> <!-- 2e 1sa 2r 3se 3i-->
+        		    	<role id="guardian" min="0" max="1" />
+		            	<role id="medic" min="0" max="1" />
+            			<role id="zone_explorer" min="0" max="1" />
+		            </roles>
+				</group-specification>
+				<group-specification id="second_best_zone_group" min="1" max="1">
+					<roles>
+		                <role id="soldier" min="0" max="7" /> <!-- 1e 0sa 1r 2se 2(3)i-->
+        		    	<role id="guardian" min="0" max="1" />
+		            	<role id="medic" min="0" max="1" />
+            			<role id="zone_explorer" min="0" max="1" />
+		            </roles>
+				</group-specification>
+			</subgroups>
+
+			<formation-constraints>
+                <cardinality min="1" max="1" object="role" id="coordinator"/>
+            </formation-constraints>
+        </group-specification>
+    </structural-specification>
+
+
+    <functional-specification>
+    	<scheme id="team_sch">
+			<goal id="support_team_goal" ds="Support team">
+    		 	<plan operator="parallel" >
+    		 		<goal id="coordinate_goal"		ds="Coordinate the teammates to occupy the best zone of Mars"/>
+    		 		<goal id="explore_map_goal"		ds="Explore the graph"/>
+    		 		<goal id="help_explore_map_goal"	ds=" Help explore the graph"/>
+    		 	</plan>
+			</goal>
+    		 
+			<mission id="m_coordinate" min="1" max="1">
+				<goal id="coordinate_goal"/>               
+            </mission>
+            
+            <mission id="m_explore_map" min="1" max="1">
+                <goal id="explore_map_goal"/>
+            </mission>
+            
+            <mission id="m_help_explore_map" min="0" max="1">
+                <goal id="help_explore_map_goal"/>
+            </mission>
+    	</scheme>
+    	
+    	<scheme id="attack_sch">
+    		<goal id="attack_opponent_goal" ds="Sabotage the opponents">
+				<plan operator="parallel" >
+					<goal id="attack_goal"		ds="Attack the opponents"/>
+					<goal id="sabotage_goal"	ds="Sabotage the opponents"/>
+					<goal id="inspect_goal"		ds="Inspect the opponents"/>
+					<goal id="repair_goal"		ds="Repair the other teammates"/>
+				</plan>
+			</goal>
+			
+			<mission id="m_attack" min="0" max="1">
+                <goal id="attack_goal"/>
+            </mission>
+            
+            <mission id="m_sabotage" min="0" max="1">
+                <goal id="sabotage_goal"/>
+            </mission>
+            
+            <mission id="m_inspect" min="0" max="1">
+                <goal id="inspect_goal"/>
+            </mission>
+            
+            <mission id="m_repair" min="0" max="1">
+                <goal id="repair_goal"/>
+            </mission>
+    	</scheme>
+    
+    	<scheme id="occupy_zone_sch">
+    		<goal id="occupy_zone" ds="Occupy the (second) best zone in the map">
+        		<plan operator="parallel" >
+					<goal id="create_zone_goal"		ds="Occupy the best zone of Mars"/>
+					<goal id="defend_zone_goal"		ds="Defend the zone from opponents"/>
+					<goal id="explore_zone_goal"	ds="Explore the zone"/>
+					<goal id="occupy_center_goal"	ds="Occupy the best vertex of the zone"/>
+                </plan>
+        	</goal>
+        	
+        	<mission id="m_create_zone" min="6" max="11">
+                <goal id="create_zone_goal"/>
+            </mission>
+            
+            <mission id="m_defend_zone" min="1" max="2">
+                <goal id="defend_zone_goal"/>
+            </mission>
+            
+            <mission id="m_explore_zone" min="1" max="1">
+                <goal id="explore_zone_goal"/>
+            </mission>
+            
+            <mission id="m_occupy_center" min="1" max="1">
+                <goal id="occupy_center_goal"/>
+            </mission>
+    	</scheme>
+	</functional-specification>
+	
+    <normative-specification>
+    	<norm id = "n1"  type="obligation"
+                          role="coordinator" mission="m_coordinate" />
+                          
+		<norm id = "n2"	  type="obligation"
+                          role="map_explorer" mission="m_explore_map" />
+
+		<norm id = "n21"  type="permission"
+                          role="map_explorer_helper" mission="m_help_explore_map" />
+                          
+        <norm id = "n3"	  type="permission"
+                          role="saboteur" mission="m_attack" />
+                          
+		<norm id = "n4"	  type="permission"
+                          role="sentinel" mission="m_sabotage" />
+                          
+		<norm id = "n5"	  type="permission"
+                          role="inspector" mission="m_inspect" />
+                          
+        <norm id = "n5b"  type="permission"
+                          role="inspector" mission="m_create_zone" />
+                          
+		<norm id = "n6"	  type="permission"
+                          role="repairer" mission="m_repair" />
+                          
+		<norm id = "n7"	  type="permission"
+                          role="soldier" mission="m_create_zone" />
+                          
+        <norm id = "n8"	  type="permission"
+                          role="guardian" mission="m_defend_zone" />                   
+                          
+        <norm id = "n9"	  type="obligation"
+                          role="zone_explorer" mission="m_explore_zone" />
+                          
+       	<norm id = "n10"  type="obligation"
+                          role="medic" mission="m_occupy_center" /> 
+    </normative-specification>
+
+</organisational-specification>
+

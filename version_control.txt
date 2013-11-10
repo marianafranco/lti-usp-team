@@ -1,0 +1,20 @@
+2013-06-25
+----------
+Some java.util.ConcurrentModificationException on Moise:
+java.util.ConcurrentModificationException
+	at java.util.ArrayList$Itr.checkForComodification(ArrayList.java:819)
+	at java.util.ArrayList$Itr.next(ArrayList.java:791)
+	at ora4mas.nopl.oe.CollectiveOE$2.get(CollectiveOE.java:211)
+	at ora4mas.nopl.oe.CollectiveOE$2.hasNext(CollectiveOE.java:195)
+	at jason.asSyntax.LogExpr$1.get(LogExpr.java:140)
+	at jason.asSyntax.LogExpr$1.hasNext(LogExpr.java:122)
+	at npl.NPLInterpreter.activationConditionHolds(NPLInterpreter.java:446)
+	at npl.NPLInterpreter.access$6(NPLInterpreter.java:442)
+	at npl.NPLInterpreter$ObligationStateTransition.updateActive(NPLInterpreter.java:630)
+	at npl.NPLInterpreter$ObligationStateTransition.run(NPLInterpreter.java:601)
+
+Started to use the moise.jar generated from the repository: version 264
+
+2013-06-15 : Initial version
+----------------------------
+Jason-1.3.9 libs

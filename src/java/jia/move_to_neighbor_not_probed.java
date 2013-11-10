@@ -1,0 +1,73 @@
+package jia;
+
+import jason.asSemantics.DefaultInternalAction;
+import jason.asSemantics.TransitionSystem;
+import jason.asSemantics.Unifier;
+import jason.asSyntax.ASSyntax;
+import jason.asSyntax.Term;
+
+import java.util.Collections;
+import java.util.List;
+
+import env.Percept;
+
+import model.graph.Graph;
+import model.graph.Vertex;
+import arch.MartianArch;
+import arch.WorldModel;
+
+/**
+ * Retrieves the position of a not probed neighbor if there is at least one,
+ * or the position of the least visited neighbor.
+ * </p>
+ * Use: jia.move_to_not_probed(+P,-N); </br>
+ * Where: P is the position and N is the neighbor.
+ * 
+ * @author mafranko
+ */
+public class move_to_neighbor_not_probed extends DefaultInternalAction {
+
+	private static final long serialVersionUID = -5827900602735423794L;
+
+	@Override
+	public Object execute(TransitionSystem ts, Unifier un, Term[] terms) throws Exception {
+		WorldModel model = ((MartianArch) ts.getUserAgArch()).getModel();
+		Graph graph = model.getGraph();
+
+		Vertex myPosition = model.getMyVertex();
+
+		List<Vertex> notProbedNeighbors = graph.returnNotProbedNeighbors(myPosition);
+		if (null == notProbedNeighbors || notProbedNeighbors.isEmpty()) {
+			// go to the least visited vertex
+			int nextMove = graph.returnLeastVisitedNeighbor(myPosition.getId());
+			if (nextMove == -1) {
+				return un.unifies(terms[0], ASSyntax.createString("none"));
+			}
+			String vertex = Percept.VERTEX_PREFIX + nextMove;
+			return un.unifies(terms[0], ASSyntax.createString(vertex));
+		} else {
+			Collections.shuffle(notProbedNeighbors);
+			for (Vertex notProbedNeighbor : notProbedNeighbors) {
+				if (notProbedNeighbor.getTeam().equals(WorldModel.myTeam)
+						&& !model.hasActiveOpponentOnVertex(notProbedNeighbor)) {
+					String vertex = Percept.VERTEX_PREFIX + notProbedNeighbor.getId();
+					return un.unifies(terms[0], ASSyntax.createString(vertex));
+				}
+			}
+			for (Vertex notProbedNeighbor : notProbedNeighbors) {
+				if (!model.hasActiveOpponentOnVertex(notProbedNeighbor)) {
+					String vertex = Percept.VERTEX_PREFIX + notProbedNeighbor.getId();
+					return un.unifies(terms[0], ASSyntax.createString(vertex));
+				}
+			}
+			// go to the least visited vertex
+			int nextMove = graph.returnLeastVisitedNeighbor(myPosition.getId());
+			if (nextMove == -1) {
+				return un.unifies(terms[0], ASSyntax.createString("none"));
+			}
+			String vertex = Percept.VERTEX_PREFIX + nextMove;
+			return un.unifies(terms[0], ASSyntax.createString(vertex));
+		}
+	}
+
+}

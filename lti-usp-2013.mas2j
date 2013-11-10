@@ -1,0 +1,43 @@
+/*
+  LTI-USP Team - Project for the  Multi-Agent Programming Contest 2013.
+  
+  Authors: Mariana Ramos Franco
+*/
+MAS lti_usp_2013 {
+
+	//infrastructure: JaCaMo
+	infrastructure: Centralised
+
+   	environment: env.MarsEnv("infrastructure","protocol(rmi)","service(rmi,'localhost:21000')","teamName(LTI-USP)","usernamePrefix(LTI-USP)")	// the environment is cartago
+
+   	agents:
+   		coordinator
+					agentArchClass arch.CoordinatorArch
+					beliefBaseClass jason.bb.IndexedBB("deadline(_)", "lastAction(_)", "lastActionParam(_)",
+					"lastActionResult(_)", "lastStepScore(_)", "money(_)", "role(_)", "score(_)", "step(_)",
+					"timestamp(_)", "visibleEdge(key,key)", "visibleEntity(key,_,_,_)",
+					"visibleVertex(key,_)", "zoneScore(_)", "zonesScore(_)", "probedVertex(key,_)",
+					"surveyedEdge(key,key,_)", "energy(_)", "position(_)", "coworkerPosition(key,_)",
+					"coworker(key,_,_,_)", "target(_)", "health(_)", "need_help(key)", "help_target(key,_)",
+					"maxEnergyDisabled(_)", "maxEnergy(_)", "maxHealth(_)", "coworkerStatus(key,_)",
+					"inspectedEntity(key,_,_,_,_,_,_,_,_,_)", "id(_)", "bestZone(_)", "secondBestZone(_)",
+					"visRange(_)", "strength(_)", "not_probeb_target(_)");
+
+		martian		#28
+					agentArchClass arch.MartianArch		// agents have a customised architecture
+					beliefBaseClass bb.MyIndexedBB("deadline(_)", "lastAction(_)", "lastActionParam(_)",
+					"lastActionResult(_)", "lastStepScore(_)", "money(_)", "role(_)", "score(_)", "step(_)",
+					"timestamp(_)", "visibleEdge(key,key)", "visibleEntity(key,_,_,_)",
+					"visibleVertex(key,_)", "zoneScore(_)", "zonesScore(_)", "probedVertex(key,_)",
+					"surveyedEdge(key,key,_)", "energy(_)", "position(_)", "coworkerPosition(key,_)",
+					"coworker(key,_,_,_)", "target(_)", "health(_)", "need_help(key)", "help_target(key,_)",
+					"maxEnergyDisabled(_)", "maxEnergy(_)", "maxHealth(_)", "coworkerStatus(key,_)",
+					"inspectedEntity(key,_,_,_,_,_,_,_,_,_)", "id(_)", "bestZone(_)", "secondBestZone(_)",
+					"visRange(_)", "strength(_)", "not_probeb_target(_)");
+
+   	classpath: "lib/moise.jar";		// moise: where the artifacts are included
+   			  "lib/c4jason.jar";	// jason-cartago integration
+   			  "lib/cartago.jar";	// cartago: platform for artifacts
+
+   	aslSourcePath: "src/asl";
+}

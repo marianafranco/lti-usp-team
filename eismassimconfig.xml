@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interfaceConfig scenario="mars2012" host="localhost" port="12300" scheduling="no" times="no"
+notifications="no" timeout="50000" queued="yes" statisticsFile="no" statisticsShell="no"
+submitStatistic="no">
+  <entities>
+    <entity name="martian1" username="LTI-USP1" password="PXct9U" iilang="no" xml="no"/>
+    <entity name="martian2" username="LTI-USP2" password="PXct9U" iilang="no" xml="no"/>
+    <entity name="martian3" username="LTI-USP3" password="PXct9U" iilang="no" xml="no"/>
+    <entity name="martian4" username="LTI-USP4" password="PXct9U" iilang="no" xml="no"/>
+    <entity name="martian5" username="LTI-USP5" password="PXct9U" iilang="no" xml="no"/>
+    <entity name="martian6" username="LTI-USP6" password="PXct9U" iilang="no" xml="no"/>
+    <entity name="martian7" username="LTI-USP7" password="PXct9U" iilang="no" xml="no"/>
+    <entity name="martian8" username="LTI-USP8" password="PXct9U" iilang="no" xml="no"/>
+    <entity name="martian9" username="LTI-USP9" password="PXct9U" iilang="no" xml="no"/>
+    <entity name="martian10" username="LTI-USP10" password="PXct9U" iilang="no" xml="no"/>
+    <entity name="martian11" username="LTI-USP11" password="PXct9U" iilang="no" xml="no"/>
+    <entity name="martian12" username="LTI-USP12" password="PXct9U" iilang="no" xml="no"/>
+    <entity name="martian13" username="LTI-USP13" password="PXct9U" iilang="no" xml="no"/>
+    <entity name="martian14" username="LTI-USP14" password="PXct9U" iilang="no" xml="no"/>
+    <entity name="martian15" username="LTI-USP15" password="PXct9U" iilang="no" xml="no"/>
+    <entity name="martian16" username="LTI-USP16" password="PXct9U" iilang="no" xml="no"/>
+    <entity name="martian17" username="LTI-USP17" password="PXct9U" iilang="no" xml="no"/>
+    <entity name="martian18" username="LTI-USP18" password="PXct9U" iilang="no" xml="no"/>
+    <entity name="martian19" username="LTI-USP19" password="PXct9U" iilang="no" xml="no"/>
+    <entity name="martian20" username="LTI-USP20" password="PXct9U" iilang="no" xml="no"/>
+    <entity name="martian21" username="LTI-USP21" password="PXct9U" iilang="no" xml="no"/>
+    <entity name="martian22" username="LTI-USP22" password="PXct9U" iilang="no" xml="no"/>
+    <entity name="martian23" username="LTI-USP23" password="PXct9U" iilang="no" xml="no"/>
+    <entity name="martian24" username="LTI-USP24" password="PXct9U" iilang="no" xml="no"/>
+    <entity name="martian25" username="LTI-USP25" password="PXct9U" iilang="no" xml="no"/>
+    <entity name="martian26" username="LTI-USP26" password="PXct9U" iilang="no" xml="no"/>
+    <entity name="martian27" username="LTI-USP27" password="PXct9U" iilang="no" xml="no"/>
+    <entity name="martian28" username="LTI-USP28" password="PXct9U" iilang="no" xml="no"/>
+  </entities>
+</interfaceConfig>
